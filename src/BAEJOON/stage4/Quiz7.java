@@ -16,7 +16,7 @@ public class Quiz7 {
 
             int[] scoreList = new int[N];
 
-            for (int j = 0; j < N; j++) {
+            for (int j = 0; j < N; j++) { // 점수입력
                 scoreList[j] = sc.nextInt();
             }
 
@@ -24,7 +24,7 @@ public class Quiz7 {
             for (int j = 0; j <scoreList.length; j++) {
                 total += scoreList[j];
             }
-
+            // 평균
             double division = (double) total/scoreList.length;
 
             int num = 0; // 평균넘었는지 확인
