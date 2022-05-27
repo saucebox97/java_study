@@ -11,7 +11,7 @@ public class Run {
         Book b3 = new Book("노잼책", "나쁜출판사", "박작가", 50000, 0.2);
 
         b1.inform();
-        b2.inform();
-        b3.inform();
+//        b2.inform();
+//        b3.inform();
     }
 }
