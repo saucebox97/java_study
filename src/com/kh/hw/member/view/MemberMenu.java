@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class MemberMenu {
 
     private Scanner sc = new Scanner(System.in);
-
+                // new MemberControoler()의 주소를 mc에 저장
     private MemberController mc = new MemberController();
 
     // 메인 메뉴 출력 메서드
