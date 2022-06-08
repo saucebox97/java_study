@@ -12,13 +12,13 @@ public class HealthMemberController {
     public static final int SIZE = 10;
 
     public HealthMemberController() {
-        hm[0] = new HealthMember("aaa", "김철수", 'M', 25, "대학생", 20220602, 20200902, "3");
-        hm[1] = new HealthMember("bbb", "박영희", 'W', 15, "중학생", 20220602, 20200603, "1");
-        hm[2] = new HealthMember("ccc", "김철수", 'M', 35, "직장인", 20220602, 20200702, "2");
+        hm[0] = new HealthMember("aaa", "김철수", 'M', 24, "대학생", 20200321, 20200621, 0);
+        hm[1] = new HealthMember("bbb", "김영희", 'W', 17, "고등학생", 20200321, 20200421, 1);
+        hm[2] = new HealthMember("ccc", "김철수", 'M', 28, "직장인", 20200521, 20200621, 2);
     }
 
     // 회원의 숫자
-    public int existMembereNum() {
+    public int existMemberNum() {
         int count = 0;
         for (int i = 0; i < 10; i++) {
             if (hm[i] == null) {
@@ -30,15 +30,15 @@ public class HealthMemberController {
     }
 
     // 회원정보
-    public void insertMember(String code, String name, char gender, int age, String job, String start, String last, int locker) {
-        int count = existMembereNum();
-        hm[count] = new HealthMember(code, name, gender, age, job, locker);
+    public void insertMember(String id, String name, char gender, int age, String job, int start, int last, int locker) {
+        int count = existMemberNum();
+        hm[count] = new HealthMember(id, name, gender, age, job, start, last, locker);
     }
 
 
     public int findIndexByID(String id) {
         int index = -1;
-        for (int i = 0; i < existMembereNum(); i++) {
+        for (int i = 0; i < existMemberNum(); i++) {
             if (id.equals(hm[i].getId())) {
                 index = i;
                 break;
@@ -59,7 +59,7 @@ public class HealthMemberController {
         // 임시 배열 생성
         HealthMember[] temp = new HealthMember[SIZE];
         int count = 0;
-        for (int i = 0; i < existMembereNum(); i++) {
+        for (int i = 0; i < existMemberNum(); i++) {
             if (name.equals(hm[i].getName())) {
                 temp[count++] = hm[i];
             }
@@ -70,6 +70,22 @@ public class HealthMemberController {
             returned[i] = temp[i];
         }
         return returned;
+    }
+
+    // 아이디 중복
+    public int findIndexById(String id) {
+        int index = -1;
+        for (int i = 0; i < existMemberNum(); i++) { //m.length
+            if (id.equals(hm[i].getId())) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+
+    public boolean checkId(String inputId) {
+        return findIndexById(inputId) != -1;
     }
 
     public boolean updateName(String id, String newName) {
@@ -108,10 +124,19 @@ public class HealthMemberController {
         return false;
     }
 
-    public boolean updateStart(String id, Date newStart) {
+    public boolean updateStart(String id, int newStart) {
         HealthMember member = searchId(id);
         if (member != null) {
             member.setStart(newStart);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean updateLast(String id, int newLast) {
+        HealthMember member = searchId(id);
+        if (member != null) {
+            member.setLast(newLast);
             return true;
         }
         return false;
@@ -122,18 +147,18 @@ public class HealthMemberController {
         index = findIndexByID(id);
         if (index != -1)
         {
-            for (int i = index; i < existMembereNum() - 1; i++) {
+            for (int i = index; i < existMemberNum() - 1; i++) {
                 hm[i] = hm[i + 1];
             }
             // 마지막 null로 변경
-            hm[existMembereNum() - 1] = null;
+            hm[existMemberNum() - 1] = null;
             return true;
         }
         return false;
     }
 
     public void delete() {
-        int count = existMembereNum();
+        int count = existMemberNum();
         for (int i = 0; i < count; i++) {
             hm[i] = null;
         }
@@ -143,19 +168,25 @@ public class HealthMemberController {
         return hm;
     }
 
-    public int checklocker() {
-       int locker = (int) (Math.random() * 10 + 1);
-       if (!isDuplicate(locker)) {
-           for (int i = 0; i < existMembereNum(); i++) {
-               hm[i].getLocker() = locker;
-           }
-       }
-       return locker;
-    }
-
-    public boolean isDuplicate(int locker) {
-        for (int i = 0; i < existMembereNum(); i++) {
-            if ([i].getLocker() = locker) return true;
+    public boolean lockerInsert(String name, String id, int lockerNum) {
+        for (HealthMember healthMember : hm) {
+            if(healthMember == null) break;
+            // 입력 이름이 있다면 입력한 락커번호로 바꾸기
+            if(name.equals(healthMember.getName())) {
+                // 같은 이름인 멤버가 없으면
+                if (searchName(name).length == 1) {
+                    healthMember.setLocker(lockerNum);
+                    return true;
+                }
+                // 같은 이름인 멤버가 있으면
+                else {
+                    if (id.equals(healthMember.getId())) {
+                        healthMember.setLocker(lockerNum);
+                        return true;
+                    }
+                    return false;
+                }
+            }
         }
         return false;
     }

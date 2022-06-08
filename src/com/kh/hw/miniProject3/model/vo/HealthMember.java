@@ -14,8 +14,8 @@ public class HealthMember {
     private int last;
     private int locker;
 
-    // 생성자
-    public HealthMember(String code, String name, char gender, int age, String job, int locker) {
+    // 생성자 똑같은거만들면안됌
+    public HealthMember() {
 
     }
 
@@ -29,6 +29,7 @@ public class HealthMember {
         this.last = last;
         this.locker = locker;
     }
+
     public void inform()
     {
         String lock = locker == 0 ? "무" : String.valueOf(locker);
@@ -85,7 +86,7 @@ public class HealthMember {
         return start;
     }
 
-    public void setStart(Date start) {
+    public void setStart(int start) {
         start = start;
     }
 
@@ -93,30 +94,16 @@ public class HealthMember {
         return last;
     }
 
-    public void setLast(String last) {
+    public void setLast(int last) {
         last = last;
     }
 
-    public String  getLocker() {
+    public int getLocker() {
         return locker;
     }
 
-    public void setLocker(String locker) {
+    public void setLocker(int locker) {
         this.locker = locker;
     }
-/*
-    @Override
-    public String toString() {
-        return "HealthMember{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", gender=" + gender +
-                ", age=" + age +
-                ", job='" + job + '\'' +
-                ", start=" + start +
-                ", last=" + last +
-                ", locker=" + locker +
-                '}';
-    }*/
 }
 
