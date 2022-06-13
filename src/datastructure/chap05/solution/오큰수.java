@@ -1,41 +1,75 @@
 package datastructure.chap05.solution;
 
-import java.util.Scanner;
-import java.util.Stack;
+/*
 
+
+A   3 5 2 7
+S   5 7 7
+
+1:  A[0] < A[1] -  S[0] = A[1]
+2:  A[1] > A[2] -  1번인덱스 스킵
+3:  A[2] < A[3] -  S[2] = A[3]
+    A[1] < A[3] -  S[1] = A[3]
+
+
+A   9 5 4 8
+S  -1 8 8 -1
+
+1: A[0] > A[1]  - 0번 스킵
+2: A[1] > A[2]  - 1번 스킵
+3: A[2] < A[3]  - S[2] = A[3]
+   A[1] < A[3]  - S[1] = A[3]
+   A[0] > A[3]  - 0번 스킵
+
+
+ */
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Stack;
+import java.util.StringTokenizer;
+
+// 백준 17298
 public class 오큰수 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        Scanner sc = new Scanner(System.in);
-        Stack<Integer> stack = new Stack<Integer>();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        // br.readLine 쓰면 36줄 throws IOException 써야됌
+        int N = Integer.parseInt(br.readLine());
 
-        int input = sc.nextInt();
-        int[] arr = new int[input];
-
-        for (int i = 0; i < input; i++) {
-            arr[i] = sc.nextInt();
+        int[] A = new int[N]; // 수열 배열
+        int[] S = new int[N]; // 정답 배열
+        // StringTokenizer 토큰을쪼갬 4개받고 
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < N; i++) {
+            A[i] = Integer.parseInt(st.nextToken());
         }
 
-        for (int i = 0; i < input; i++) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(0); // 처음에는 스택이 비어있으므로 항상 최초값을 추가
 
-            while (!stack.isEmpty() && arr[stack.peek()] < arr[i]) {
-                arr[stack.pop()] = arr[i];
+        // 3 5 2 7    || 5 7 7 -1
+        // 9 5 4 8
+        for (int i = 1; i < N; i++) {
+
+            while (!stack.isEmpty() && A[stack.peek()] < A[i]) {
+                S[stack.pop()] = A[i]; // 정답 배열에 오큰수를 저장
             }
-
             stack.push(i);
         }
 
         while (!stack.isEmpty()) {
-            arr[stack.pop()] = -1;
+            S[stack.pop()] = -1;
         }
 
-        // 기호를 저장할 문자열 String 대신 StringBuilder
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < input; i++) {
-            sb.append(arr[i]).append(' ');
+        for (int n : S) {
+            sb.append(n).append(" ");
         }
-
         System.out.println(sb);
+
+
     }
 }

@@ -68,7 +68,7 @@ public class Main {
     } // end main
 
     public static void cast(Object o) {
-        if (o instanceof String) {
+        if (o instanceof String) { // 강제 타입 변화전 instanceof로 변환 가능성 검사
             String s = (String) o;
             System.out.println("스트링 변환 성공!");
         } else {
