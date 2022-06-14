@@ -13,7 +13,7 @@ public class HeaderNode {
         this.firstNode = null;
     }
 
-    // 헤더노드의 포인터(주소)를 셋팅하는 기능 //기본타입아니면 다 주소저장
+    // 헤더노드의 포인터(주소)를 셋팅하는 기능 // 기본타입아니면 다 주소저장
     public void setFirstNode(Node firstNode) {
         this.firstNode = firstNode;
     }

@@ -10,7 +10,7 @@ public class Node {
     private Node nextNode;
 
     // 생성자
-    public  Node(int data) {
+    public Node(int data) {
         this.data = data;
     }
 
