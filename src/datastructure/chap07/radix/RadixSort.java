@@ -12,7 +12,7 @@ public class RadixSort {
         // 최대 자리수 구하기
         int digit = 0;
         for (int n : arr) {
-            int len = String.valueOf(n).length(); // 자리수 세기
+            int len = String.valueOf(n).length(); // 문자열로변환하고 자리수셈
             if (len > digit) {
                 digit = len;
             }
