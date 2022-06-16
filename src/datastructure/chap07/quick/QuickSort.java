@@ -21,7 +21,7 @@ public class QuickSort {
          *  leftmost가 rightmost보다 크거나 같다면 정렬 할 원소가
          *  1개 이하이므로 정렬하지 않고 return한다.
          */
-        if (leftmost >= rightmost) { // 1개 될때까지
+        if (leftmost >= rightmost) {
             return;
         }
 
@@ -35,7 +35,7 @@ public class QuickSort {
          */
         int pivot = partition(a, leftmost, rightmost);
 
-        quickSort(a, leftmost, pivot - 1);
+        quickSort(a, leftmost, pivot - 1); // 재귀함수
         quickSort(a, pivot + 1, rightmost);
     }
 
