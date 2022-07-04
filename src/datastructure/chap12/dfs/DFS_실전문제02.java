@@ -1,6 +1,7 @@
 package datastructure.chap12.dfs;
 
-/*
+/* 백준 2023 신기한소수
+
      1. 소수는 약수가 1과 자기 자신인 수를 말합니다. 예를 들어 4는 약수가 1, 2, 4이므로 소수가 아니고
         7은 약수가 1과 7이므로 소수입니다.
 
@@ -31,5 +32,58 @@ package datastructure.chap12.dfs;
 
  */
 
+
+import java.util.Scanner;
+
+// 백준 2023
 public class DFS_실전문제02 {
+
+    static int N;
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        N = sc.nextInt();
+        sc.close();
+
+        // 맨 앞의 숫자가 소수여야 돼기때문에 2,3,5,7,밖에안됀다
+        DFS(2, 1);
+        DFS(3, 1);
+        DFS(5, 1);
+        DFS(7, 1);
+
+    }
+
+    /**
+     * DFS 메서드
+     *
+     * @param number - 소수 판별할 숫자
+     * @param level  - 재귀 깊이 레벨
+     */
+    static void DFS(int number, int level) {
+
+        if (level == N) {
+            if (isPrime(number)) {
+                System.out.println(number);
+            }
+            return;
+        }
+
+        // 자리수가 올라갈수록 홀수들만 뒤에 이어붙여서 DFS 반복 수행
+        for (int i = 1; i < 10; i += 2) {
+            int newNumber = number * 10 + i; // 자리수 증가
+            if (isPrime(newNumber)) { // 소수면 DFS 추가진행
+                DFS(newNumber, level + 1);
+            }
+        }
+    }
+
+
+    // 어떤 숫자가 소수인지 판별하는 메서드
+    static boolean isPrime(int num) {
+        for (int i = 2; i < num; i++) {
+            if (num % i == 0) return false;
+        }
+        return true;
+    }
 }

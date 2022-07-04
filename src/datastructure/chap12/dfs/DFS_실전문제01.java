@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+// 백준 11724
 public class DFS_실전문제01 {
 
     // 그래프 인접 리스트 방식
